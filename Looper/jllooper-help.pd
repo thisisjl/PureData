@@ -1,0 +1,12 @@
+#N canvas 583 121 494 191 10;
+#X obj 10 33 jllooper;
+#X obj 10 5 adc~;
+#X obj 9 166 dac~;
+#X text 140 30 Press once the left button to start recording \, press
+it again to stop.;
+#X text 140 60 Press the right button once to start playing the loop
+\, press it again to stop.;
+#X text 140 89 Maximum recording time is 10 seconds;
+#X connect 0 0 2 0;
+#X connect 0 0 2 1;
+#X connect 1 0 0 0;
