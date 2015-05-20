@@ -108,12 +108,12 @@ with a feedback. The output of [delay] will set [phasor~]'s phase to
 #X obj -12 48 throw~ \$0-audioin;
 #X obj 189 399 catch~ \$0-audioin;
 #X obj 388 310 s \$0-restartloop;
-#X floatatom 108 172 5 0 0 1 bpm - -;
-#X floatatom 108 192 5 0 0 1 bars - -;
-#X obj 173 172 vradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144
+#X floatatom 108 165 5 0 0 1 bpm - -;
+#X floatatom 108 185 5 0 0 1 bars - -;
+#X obj 173 165 vradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144
 -1 -1 0;
-#X text 190 171 manual;
-#X text 190 186 auto;
+#X text 190 164 manual;
+#X text 190 179 auto;
 #X obj 84 245 s \$0-bpm;
 #X obj 84 265 s \$0-bars;
 #X obj 156 245 s \$0-mode;
@@ -226,4 +226,4 @@ with a feedback. The output of [delay] will set [phasor~]'s phase to
 #X connect 113 0 115 0;
 #X connect 114 0 113 1;
 #X connect 116 0 61 0;
-#X coords 0 -1 1 1 130 110 2 100 100;
+#X coords 0 -1 1 1 130 105 2 100 100;
