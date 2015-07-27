@@ -1,15 +1,9 @@
 #N canvas 583 121 556 448 10;
 #X obj 10 5 adc~;
 #X obj 10 159 dac~;
-#X text 160 66 Press once the left button to start recording \, press
-it again to stop.;
-#X text 160 96 Press the right button once to start playing the loop
-\, press it again to stop.;
-#X text 160 175 Maximum recording time is 10 seconds;
+#X text 160 180 Maximum recording time is 10 seconds;
 #X obj 10 33 jllooper;
-#X text 159 48 If manual:;
-#X text 159 125 If auto:;
-#X text 161 139 Set bpm and number of bars to define length of loop
+#X text 161 109 Set bpm and number of bars to define length of loop
 \; press left button to start recording.;
 #X text 161 28 Manual and auto define the size of the loop;
 #X obj 0 -50 cnv 15 552 40 empty empty jllooper 3 12 0 18 -204280 -1
@@ -25,18 +19,20 @@ it again to stop.;
 #X text 108 259 bang;
 #X text 177 259 - a bang to the second inlet starts or stops recording.
 ;
-#X obj 88 303 cnv 17 3 35 empty \$0-pddp.cnv.let.1 2 5 9 0 16 -228856
--162280 0;
-#X text 108 302 bang;
-#X text 177 302 - a bang to the third inlet starts or stops playing.
-;
-#X obj 4 344 cnv 3 550 3 empty \$0-pddp.cnv.outlets outlets 8 12 0
+#X obj 4 314 cnv 3 550 3 empty \$0-pddp.cnv.outlets outlets 8 12 0
 13 -228856 -1 0;
-#X obj 82 353 cnv 17 3 17 empty \$0-pddp.cnv.let.0 0 5 9 0 16 -228856
+#X obj 82 323 cnv 17 3 17 empty \$0-pddp.cnv.let.0 0 5 9 0 16 -228856
 -162280 0;
-#X text 102 352 signal;
-#X text 171 352 - the recording.;
+#X text 102 322 signal;
+#X text 171 322 - the recording.;
 #X text 21 -27 simple looper;
-#X connect 0 0 5 0;
-#X connect 5 0 1 0;
-#X connect 5 0 1 1;
+#X text 160 66 Press once the left button to start recording \, press
+it again to stop. The second bang \, will trigger playback.;
+#X text 159 48 - If manual:;
+#X text 159 95 - If auto:;
+#X text 159 136 - Double click will reset the loop.;
+#X text 159 151 - Once the recording is done \, press the button again
+to add layers to the loop.;
+#X connect 0 0 3 0;
+#X connect 3 0 1 0;
+#X connect 3 0 1 1;
