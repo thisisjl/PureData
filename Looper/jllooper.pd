@@ -1,36 +1,29 @@
 #N canvas 273 23 832 751 10;
-#X obj -12 27 inlet~ audioin;
-#X obj 102 27 inlet start/stop recording;
-#X obj 272 27 inlet start/stop playback;
-#X obj 14 116 bng 30 250 50 0 empty empty rec/stop -10 38 0 10 -262144
+#X obj -12 -23 inlet~ audioin;
+#X obj 102 -23 inlet start/stop recording;
+#X obj 50 116 bng 30 250 50 0 empty empty rec/stop -10 38 0 10 -262144
 -1 -1;
-#X obj 74 116 bng 30 250 50 0 empty empty play/stop -10 38 0 10 -262144
--1 -1;
-#X obj -16 225 s \$0-rec;
-#X obj 102 48 s \$0-rec;
-#X obj 272 48 s \$0-play;
-#X obj 56 225 s \$0-play;
+#X obj 4 225 s \$0-rec;
+#X obj 102 -2 s \$0-rec;
 #X text 2 100 input~;
 #X text 56 99 rec;
-#X text 92 99 play;
-#X obj -12 48 throw~ \$0-audioin;
+#X obj -12 -2 throw~ \$0-audioin;
 #X floatatom 8 165 5 0 0 1 bpm - -;
 #X floatatom 8 185 5 0 0 1 bars - -;
 #X obj 73 165 vradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144 -1
 -1 0;
 #X text 90 164 manual;
 #X text 90 179 auto;
-#X obj -16 245 s \$0-bpm;
-#X obj -16 265 s \$0-bars;
-#X obj 56 245 s \$0-mode;
-#X obj 14 77 r \$0-autostop;
+#X obj -6 245 s \$0-bpm;
+#X obj -6 265 s \$0-bars;
+#X obj 73 215 s \$0-mode;
+#X obj 50 77 r \$0-autostop;
 #X obj 141 458 cnv 15 440 260 empty empty empty 20 12 0 14 -233017
 -66577 0;
 #X obj 302 654 tabread4~ \$0-loop;
 #X floatatom 302 501 10 0 0 0 - - -;
 #X obj 302 590 phasor~;
 #X obj 302 631 *~;
-#X obj 302 674 *~ 0.1;
 #X obj 302 481 expr 44100 / $f1;
 #X obj 386 520 r \$0-stopplay;
 #X obj 445 598 metro 100;
@@ -42,21 +35,8 @@
 -1 -1 0 1;
 #X obj 445 667 /;
 #X msg 478 667 441000;
-#X obj 145 572 counter;
-#X floatatom 145 593 10 0 0 0 - - -;
-#X obj 145 554 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj 145 613 mod 2;
-#X floatatom 145 634 5 0 0 0 - - -;
-#X obj 145 655 sel 0 1;
-#X obj 164 554 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj 145 531 r \$0-play;
-#X obj 164 675 s \$0-startplay;
-#X obj 145 695 s \$0-stopplay;
 #X obj 386 501 r \$0-startplay;
 #X text 153 458 playback:;
-#X obj 184 552 s \$0-restartloop;
 #X obj 302 460 r \$0-loopsize;
 #X obj 317 611 r \$0-loopsize;
 #X obj 302 552 spigot;
@@ -117,21 +97,14 @@
 #X obj 590 336 r \$0-loopsize;
 #X obj 590 356 / 44.1;
 #X text 261 233 Manual loopsize:;
-#X obj 311 325 cnv 15 130 85 empty empty empty 20 12 0 14 -262130 -66577
+#X obj 311 325 cnv 15 130 87 empty empty empty 20 12 0 14 -262130 -66577
 0;
 #X obj 313 394 tabwrite~ \$0-loop;
 #X text 562 414 send to rec bang;
 #X text 259 432 send duration of loop in samples;
-#X obj 430 149 cnv 15 118 55 empty empty empty 20 12 0 14 -233017 -66577
+#X obj 430 149 cnv 15 118 75 empty empty empty 20 12 0 14 -233017 -66577
 0;
-#X obj 433 185 outlet~;
 #X text 433 148 output:;
-#X text 430 22 Recording manual mode \; Recording and playback are
-triggered by bangs \; To record \, press once the left bang \; press
-it again to stop recording \;;
-#X text 430 76 Recording automatic mode \; set bpm and bars for the
-duration of loop \; then press once the left bang to start recording
-\; Playback \; press once right bang to play \, again to stop.;
 #N canvas 29 305 491 428 recordinglogic 0;
 #X obj -134 137 mtl/doubleclick;
 #X obj -134 72 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
@@ -209,93 +182,98 @@ duration of loop \; then press once the left bang to start recording
 #X obj 330 355 catch~ \$0-audioin;
 #X text 319 322 Recording;
 #X msg 287 313 stop;
-#X obj -80 84 adc~;
-#X obj 586 200 dac~;
 #X obj 315 337 r~ \$0-audioout;
-#X obj 302 695 s~ \$0-audioout;
+#X obj 302 675 s~ \$0-audioout;
 #X obj 433 165 r~ \$0-audioout;
-#X connect 0 0 12 0;
-#X connect 1 0 6 0;
-#X connect 2 0 7 0;
-#X connect 3 0 5 0;
-#X connect 4 0 8 0;
-#X connect 13 0 18 0;
-#X connect 14 0 19 0;
-#X connect 15 0 20 0;
-#X connect 21 0 3 0;
-#X connect 23 0 27 0;
-#X connect 24 0 52 0;
-#X connect 25 0 26 0;
-#X connect 26 0 23 0;
-#X connect 27 0 123 0;
-#X connect 28 0 24 0;
-#X connect 29 0 54 0;
-#X connect 30 0 32 0;
-#X connect 31 0 30 0;
-#X connect 32 0 33 0;
-#X connect 33 0 35 0;
-#X connect 35 0 34 0;
+#X obj 433 205 outlet~;
+#X obj 433 185 *~ 0.1;
+#X obj 158 494 r \$0-stoprec;
+#X obj 158 515 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 158 533 s \$0-startplay;
+#X obj 158 590 s \$0-stopplay;
+#X obj 158 552 r \$0-reset;
+#X obj 158 572 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 430 -10 Recording manual mode \; - Press once the button to
+start recording \; - Press it twice to stop recording. \; This second
+press will define the length of the loop \; and will also trigger the
+playback of the loop. \; You can add more layers to the loop by pressing
+the button again. \; - Double click will reset the loop.;
+#X text 430 96 Recording automatic mode \; set bpm and bars for the
+duration of loop \; then press once the left bang to start recording
+\;;
+#X connect 0 0 7 0;
+#X connect 1 0 4 0;
+#X connect 2 0 3 0;
+#X connect 8 0 13 0;
+#X connect 9 0 14 0;
+#X connect 10 0 15 0;
+#X connect 16 0 2 0;
+#X connect 18 0 101 0;
+#X connect 19 0 35 0;
+#X connect 20 0 21 0;
+#X connect 21 0 18 0;
+#X connect 22 0 19 0;
+#X connect 23 0 37 0;
+#X connect 24 0 26 0;
+#X connect 25 0 24 0;
+#X connect 26 0 27 0;
+#X connect 27 0 29 0;
+#X connect 29 0 28 0;
+#X connect 30 0 29 1;
+#X connect 31 0 36 0;
+#X connect 31 0 19 0;
+#X connect 33 0 22 0;
+#X connect 34 0 21 1;
+#X connect 35 0 20 0;
 #X connect 36 0 35 1;
-#X connect 37 0 38 0;
-#X connect 38 0 40 0;
+#X connect 37 0 35 1;
+#X connect 37 0 20 0;
+#X connect 38 0 39 0;
 #X connect 39 0 37 0;
-#X connect 40 0 41 0;
-#X connect 41 0 42 0;
-#X connect 42 0 46 0;
-#X connect 42 1 45 0;
-#X connect 43 0 37 2;
-#X connect 44 0 39 0;
-#X connect 44 0 49 0;
-#X connect 47 0 53 0;
-#X connect 47 0 24 0;
-#X connect 50 0 28 0;
-#X connect 51 0 26 1;
-#X connect 52 0 25 0;
-#X connect 53 0 52 1;
-#X connect 54 0 52 1;
-#X connect 54 0 25 0;
-#X connect 55 0 56 0;
-#X connect 56 0 54 0;
-#X connect 58 0 61 0;
-#X connect 59 0 60 0;
-#X connect 61 0 59 0;
-#X connect 66 0 65 0;
+#X connect 41 0 44 0;
+#X connect 42 0 43 0;
+#X connect 44 0 42 0;
+#X connect 49 0 48 0;
+#X connect 51 0 52 0;
+#X connect 52 0 53 0;
+#X connect 53 0 54 0;
+#X connect 58 0 60 0;
+#X connect 58 0 88 0;
+#X connect 59 0 62 0;
+#X connect 60 0 59 0;
+#X connect 61 0 59 1;
+#X connect 62 0 66 0;
+#X connect 64 0 58 0;
+#X connect 65 0 99 0;
+#X connect 66 0 63 0;
+#X connect 67 0 68 0;
 #X connect 68 0 69 0;
-#X connect 69 0 70 0;
-#X connect 70 0 71 0;
-#X connect 75 0 77 0;
-#X connect 75 0 105 0;
-#X connect 76 0 79 0;
-#X connect 77 0 76 0;
-#X connect 78 0 76 1;
+#X connect 69 0 73 0;
+#X connect 71 0 72 0;
+#X connect 72 0 73 0;
+#X connect 72 1 73 1;
+#X connect 73 0 76 0;
+#X connect 76 0 77 0;
+#X connect 78 0 79 0;
 #X connect 79 0 83 0;
-#X connect 81 0 75 0;
-#X connect 82 0 119 0;
-#X connect 83 0 80 0;
+#X connect 80 0 83 1;
+#X connect 82 0 81 0;
+#X connect 83 0 82 0;
 #X connect 84 0 85 0;
-#X connect 85 0 86 0;
-#X connect 86 0 90 0;
-#X connect 88 0 89 0;
-#X connect 89 0 90 0;
-#X connect 89 1 90 1;
-#X connect 90 0 93 0;
-#X connect 93 0 94 0;
-#X connect 95 0 96 0;
-#X connect 96 0 100 0;
-#X connect 97 0 100 1;
-#X connect 99 0 98 0;
-#X connect 100 0 99 0;
-#X connect 101 0 102 0;
-#X connect 102 0 99 1;
-#X connect 114 0 113 0;
-#X connect 115 0 66 0;
-#X connect 115 0 61 0;
-#X connect 116 0 105 0;
-#X connect 117 0 116 1;
-#X connect 119 0 78 0;
-#X connect 120 1 12 0;
-#X connect 122 0 116 0;
-#X connect 124 0 109 0;
-#X connect 124 0 121 0;
-#X connect 124 0 121 1;
+#X connect 85 0 82 1;
+#X connect 94 0 93 0;
+#X connect 95 0 49 0;
+#X connect 95 0 44 0;
+#X connect 96 0 88 0;
+#X connect 97 0 96 1;
+#X connect 99 0 61 0;
+#X connect 100 0 96 0;
+#X connect 102 0 104 0;
+#X connect 104 0 103 0;
+#X connect 105 0 106 0;
+#X connect 106 0 107 0;
+#X connect 109 0 110 0;
+#X connect 110 0 108 0;
 #X coords 0 -1 1 1 130 105 2 0 100;
